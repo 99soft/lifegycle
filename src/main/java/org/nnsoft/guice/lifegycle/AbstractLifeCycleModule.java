@@ -67,11 +67,21 @@ abstract class AbstractLifeCycleModule
         this.typeMatcher = typeMatcher;
     }
 
+    /**
+     * Returns the annotation type the scanner will look for in the types methods.
+     *
+     * @return The annotation type the scanner will look for in the types methods.
+     */
     protected final Class<? extends Annotation> getAnnotationType()
     {
         return annotationType;
     }
 
+    /**
+     * Returns the type matcher to filter classes where looking for lifecycle annotations.
+     *
+     * @return the type matcher to filter classes where looking for lifecycle annotations.
+     */
     protected final Matcher<Object> getTypeMatcher()
     {
         return typeMatcher;
