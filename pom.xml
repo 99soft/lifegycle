@@ -27,7 +27,7 @@
   <artifactId>lifegycle</artifactId>
   <version>0.1-SNAPSHOT</version>
 
-  <name>99soft :: Lifegygle</name>
+  <name>99soft :: Lifegycle</name>
   <description>objects lifecycle management made easy with Google Guice</description>
   <url>http://99soft.github.com/lifegycle/</url>
   <inceptionYear>2012</inceptionYear>
