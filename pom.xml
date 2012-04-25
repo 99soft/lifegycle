@@ -29,13 +29,13 @@
 
   <name>99soft :: Lifegygle</name>
   <description>objects lifecycle management made easy with Google Guice</description>
-  <url>http://99soft.github.com/lifegygle/</url>
+  <url>http://99soft.github.com/lifegycle/</url>
   <inceptionYear>2012</inceptionYear>
 
   <scm>
-    <url>http://github.com/99soft/lifegygle</url>
-    <connection>scm:git:ssh://github.com/99soft/lifegygle.git</connection>
-    <developerConnection>scm:git:git+ssh://git@github.com/99soft/lifegygle.git</developerConnection>
+    <url>http://github.com/99soft/lifegycle</url>
+    <connection>scm:git:ssh://github.com/99soft/lifegycle.git</connection>
+    <developerConnection>scm:git:git+ssh://git@github.com/99soft/lifegycle.git</developerConnection>
   </scm>
   <issueManagement>
     <system>GitHub Issue Management</system>
@@ -44,7 +44,7 @@
   <distributionManagement>
     <site>
       <id>github</id>
-      <url>gitsite:git@github.com/99soft/lifegygle.git</url>
+      <url>gitsite:git@github.com/99soft/lifegycle.git</url>
     </site>
   </distributionManagement>
 
