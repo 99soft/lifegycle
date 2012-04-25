@@ -19,23 +19,12 @@ package org.nnsoft.guice.lifegycle;
 import static com.google.inject.Guice.createInjector;
 import static junit.framework.Assert.assertTrue;
 
-import org.junit.Before;
 import org.junit.Test;
-import org.nnsoft.guice.lifegycle.AfterInjection;
-import org.nnsoft.guice.lifegycle.AfterInjectionModule;
 
 public final class AfterInjectionTestCase
 {
 
     private boolean afterInjectionInvoked = false;
-
-    @Before
-    public void setUp()
-    {
-        createInjector( new AfterInjectionModule() )
-        .getMembersInjector( AfterInjectionTestCase.class )
-        .injectMembers( this );
-    }
 
     @AfterInjection
     public void init()
@@ -44,9 +33,18 @@ public final class AfterInjectionTestCase
     }
 
     @Test
-    public void verifyAfterInjectionAnnotatedMethodInvocation()
+    public void afterInjectionAnnotatedMethodInvocation()
     {
+        createInjector( new AfterInjectionModule() )
+        .getMembersInjector( AfterInjectionTestCase.class )
+        .injectMembers( this );
         assertTrue( afterInjectionInvoked );
+    }
+
+    @Test//( expected = ConfigurationException.class )
+    public void afterInjectionAnnotatedMehthodRequiresNoArgs()
+    {
+        createInjector( new AfterInjectionModule() ).getInstance( WrongAfterInjectionMethod.class );
     }
 
 }
