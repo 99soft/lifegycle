@@ -19,6 +19,7 @@ package org.nnsoft.guice.lifegycle;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
+import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
@@ -26,6 +27,7 @@ import java.lang.annotation.Target;
  * The {@code AfterInjection} annotation is used on a method that needs to be executed after dependency injection is
  * done to perform any initialization.
  */
+@Documented
 @Retention( RUNTIME )
 @Target( METHOD )
 public @interface AfterInjection
