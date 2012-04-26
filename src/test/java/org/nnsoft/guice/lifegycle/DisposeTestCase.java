@@ -44,7 +44,7 @@ public final class DisposeTestCase
     }
 
     @Test( expected = ConfigurationException.class )
-    public void afterInjectionAnnotatedMehthodRequiresNoArgs()
+    public void disposeAnnotatedMehthodRequiresNoArgs()
     {
         createInjector( new DisposeModule() ).getInstance( WrongDisposeMethod.class );
     }
