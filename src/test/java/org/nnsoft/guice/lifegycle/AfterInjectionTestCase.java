@@ -49,4 +49,10 @@ public final class AfterInjectionTestCase
         createInjector( new AfterInjectionModule() ).getInstance( WrongAfterInjectionMethod.class );
     }
 
+    @Test( expected = ConfigurationException.class )
+    public void afterInjectionAnnotatedMehthodThrowsException()
+    {
+        createInjector( new AfterInjectionModule() ).getInstance( ThrowingExceptionAfterInjectionMethod.class );
+    }
+
 }
