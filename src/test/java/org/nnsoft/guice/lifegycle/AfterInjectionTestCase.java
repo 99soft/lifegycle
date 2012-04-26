@@ -22,6 +22,7 @@ import static junit.framework.Assert.assertTrue;
 import org.junit.Test;
 
 import com.google.inject.ConfigurationException;
+import com.google.inject.ProvisionException;
 
 public final class AfterInjectionTestCase
 {
@@ -49,7 +50,7 @@ public final class AfterInjectionTestCase
         createInjector( new AfterInjectionModule() ).getInstance( WrongAfterInjectionMethod.class );
     }
 
-    @Test( expected = ConfigurationException.class )
+    @Test( expected = ProvisionException.class )
     public void afterInjectionAnnotatedMehthodThrowsException()
     {
         createInjector( new AfterInjectionModule() ).getInstance( ThrowingExceptionAfterInjectionMethod.class );
