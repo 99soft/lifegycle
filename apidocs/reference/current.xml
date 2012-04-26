@@ -1,0 +1,228 @@
+<api>
+<package name="org.nnsoft.guice.lifegycle"
+>
+<class name="AfterInjection"
+ extends="java.lang.Object"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="java.lang.annotation.Annotation">
+</implements>
+</class>
+<class name="AfterInjectionModule"
+ extends="org.nnsoft.guice.lifegycle.AbstractLifeCycleModule"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="AfterInjectionModule"
+ type="org.nnsoft.guice.lifegycle.AfterInjectionModule"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<constructor name="AfterInjectionModule"
+ type="org.nnsoft.guice.lifegycle.AfterInjectionModule"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="afterInjectionAnnotationType" type="java.lang.Class&lt;A&gt;">
+</parameter>
+<parameter name="typeMatcher" type="com.google.inject.matcher.Matcher&lt;java.lang.Object&gt;">
+</parameter>
+</constructor>
+<method name="configure"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</method>
+<method name="getAnnotationType"
+ return="java.lang.Class&lt;? extends java.lang.annotation.Annotation&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</method>
+<method name="getTypeMatcher"
+ return="com.google.inject.matcher.Matcher&lt;java.lang.Object&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</method>
+</class>
+<class name="Dispose"
+ extends="java.lang.Object"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<implements name="java.lang.annotation.Annotation">
+</implements>
+</class>
+<interface name="DisposeHandler"
+ abstract="true"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<method name="onError"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="injectee" type="I">
+</parameter>
+<parameter name="error" type="E">
+</parameter>
+</method>
+<method name="onSuccess"
+ return="void"
+ abstract="true"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="injectee" type="I">
+</parameter>
+</method>
+</interface>
+<class name="DisposeModule"
+ extends="org.nnsoft.guice.lifegycle.AbstractLifeCycleModule"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="DisposeModule"
+ type="org.nnsoft.guice.lifegycle.DisposeModule"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<constructor name="DisposeModule"
+ type="org.nnsoft.guice.lifegycle.DisposeModule"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="disposeAnnotationType" type="java.lang.Class&lt;A&gt;">
+</parameter>
+<parameter name="typeMatcher" type="com.google.inject.matcher.Matcher&lt;java.lang.Object&gt;">
+</parameter>
+</constructor>
+<method name="configure"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</method>
+<method name="getAnnotationType"
+ return="java.lang.Class&lt;? extends java.lang.annotation.Annotation&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</method>
+<method name="getTypeMatcher"
+ return="com.google.inject.matcher.Matcher&lt;java.lang.Object&gt;"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="protected"
+>
+</method>
+</class>
+<class name="Disposer"
+ extends="java.lang.Object"
+ abstract="false"
+ static="false"
+ final="true"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<constructor name="Disposer"
+ type="org.nnsoft.guice.lifegycle.Disposer"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</constructor>
+<method name="dispose"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+</method>
+<method name="dispose"
+ return="void"
+ abstract="false"
+ native="false"
+ synchronized="false"
+ static="false"
+ final="false"
+ deprecated="not deprecated"
+ visibility="public"
+>
+<parameter name="disposeHandler" type="org.nnsoft.guice.lifegycle.DisposeHandler">
+</parameter>
+</method>
+</class>
+</package>
+</api>

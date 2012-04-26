@@ -13,7 +13,7 @@
     <script type="text/javascript" src="./js/apache-maven-fluido.min.js"></script>
 
     
-      <meta name="author" content="The 99 Software Foundation" />
+      <meta name="author" content="Dispose" />
     <meta name="Date-Revision-yyyymmdd" content="20120426" />
     <meta http-equiv="Content-Language" content="en" />
     
@@ -60,14 +60,14 @@
                                    <h5>99soft :: Lifegycle</h5>
                   <ul>
                   <li class="none">
-            <strong>Home</strong>
-          </li>
+                          <a href="index.html" title="Home">Home</a>
+            </li>
                   <li class="none">
                           <a href="after-injection.html" title="After Injection callbacks">After Injection callbacks</a>
             </li>
                   <li class="none">
-                          <a href="dispose.html" title="Dispose hooker">Dispose hooker</a>
-            </li>
+            <strong>Dispose hooker</strong>
+          </li>
           </ul>
                        <h5>External Links</h5>
                   <ul>
@@ -80,47 +80,9 @@
           </ul>
                        <h5>Project Documentation</h5>
                   <ul>
-                                                                                                                                                                                                                                                                                    <li class="expanded">
+                                                                                                                                                                                                                                                                          <li class="collapsed">
                           <a href="project-info.html" title="Project Information">Project Information</a>
-                    <ul>
-                      <li class="none">
-                          <a href="distribution-management.html" title="Distribution Management">Distribution Management</a>
-            </li>
-                      <li class="none">
-            <strong>About</strong>
-          </li>
-                      <li class="none">
-                          <a href="dependencies.html" title="Dependencies">Dependencies</a>
-            </li>
-                      <li class="none">
-                          <a href="issue-tracking.html" title="Issue Tracking">Issue Tracking</a>
-            </li>
-                      <li class="none">
-                          <a href="plugins.html" title="Project Plugins">Project Plugins</a>
-            </li>
-                      <li class="none">
-                          <a href="integration.html" title="Continuous Integration">Continuous Integration</a>
-            </li>
-                      <li class="none">
-                          <a href="license.html" title="Project License">Project License</a>
-            </li>
-                      <li class="none">
-                          <a href="mail-lists.html" title="Mailing Lists">Mailing Lists</a>
-            </li>
-                      <li class="none">
-                          <a href="team-list.html" title="Project Team">Project Team</a>
-            </li>
-                      <li class="none">
-                          <a href="source-repository.html" title="Source Repository">Source Repository</a>
-            </li>
-                      <li class="none">
-                          <a href="plugin-management.html" title="Plugin Management">Plugin Management</a>
-            </li>
-                      <li class="none">
-                          <a href="project-summary.html" title="Project Summary">Project Summary</a>
-            </li>
-              </ul>
-        </li>
+                  </li>
                                                                                                                                                                                                                     <li class="collapsed">
                           <a href="project-reports.html" title="Project Reports">Project Reports</a>
                   </li>
@@ -170,15 +132,106 @@
       <div id="bodyColumn" class="content">
         <div id="contentBox">
                               
-          <!--  --><!-- Copyright 2012 The 99 Software Foundation --><!--  --><!-- Licensed under the Apache License, Version 2.0 (the "License"); --><!-- you may not use this file except in compliance with the License. --><!-- You may obtain a copy of the License at --><!--  --><!-- http://www.apache.org/licenses/LICENSE-2.0 --><!--  --><!-- Unless required by applicable law or agreed to in writing, software --><!-- distributed under the License is distributed on an "AS IS" BASIS, --><!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. --><!-- See the License for the specific language governing permissions and --><!-- limitations under the License. --><!--  --><div class="section"><h2>Welcome to Lyfegycle!<a name="Welcome_to_Lyfegycle"></a></h2><p>People often complained the Google Guice lack of support of EJB3.0 <tt>@PostConstruct</tt> and <tt>@PreDestroy</tt> annotations to manage the injected objects lifecycle.</p><p>This small library aims to add that support in a lightweight yet dynamic way, allowing users define the annotations type they want to use to mark methods to execute once the injection is performed and when shutting down the application.</p></div><div class="section"><h2>Before starting<a name="Before_starting"></a></h2><p>Lyfegycle is available on the Maven Central repo, you just need to add the dependency below in your <tt>pom.xml</tt> file:</p><div class="source"><pre class="prettyprint">&lt;dependencies&gt;
-  ...
-  &lt;dependency&gt;
-    &lt;groupId&gt;org.99soft.guice&lt;/groupId&gt;
-    &lt;artifactId&gt;lifegycle&lt;/artifactId&gt;
-    &lt;version&gt;0.1&lt;/version&gt;
-  &lt;/dependency&gt;
-  ...
-&lt;/dependencies&gt;</pre></div></div><div class="section"><h2>Acknowledgements<a name="Acknowledgements"></a></h2><p>This work is dedicated to our city, L'Aquila, destroyed by a terrible earthquake the 6th April, 2009... That day more than 300 people were killed because buildings collapsed after a magnitudo 6.3 earthquake at 3:32 am.</p><p>We'll never forget that episode.</p></div>
+          <!--  --><!-- Copyright 2012 The 99 Software Foundation --><!--  --><!-- Licensed under the Apache License, Version 2.0 (the "License"); --><!-- you may not use this file except in compliance with the License. --><!-- You may obtain a copy of the License at --><!--  --><!-- http://www.apache.org/licenses/LICENSE-2.0 --><!--  --><!-- Unless required by applicable law or agreed to in writing, software --><!-- distributed under the License is distributed on an "AS IS" BASIS, --><!-- WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. --><!-- See the License for the specific language governing permissions and --><!-- limitations under the License. --><!--  --><div class="section"><h2>Dispose<a name="Dispose"></a></h2><p>Let's start on defining an object type that requires dependency injection and that a callback has to be invoked once application will be shutdown:</p><div class="source"><pre class="prettyprint">import org.nnsoft.guice.lifegycle.Dispose;
+
+@Singleton // not necessary, but let's add some spice
+public class MyServiceImpl
+{
+
+    @Inject
+    private Dependency dependency;
+
+    // setter omitted for simplicity
+
+    @Dispose
+    public void tearDown()
+    {
+        ...
+    }
+
+}</pre></div><p>All users have to do, is adding the <tt>DisposeModule</tt> when creating the <tt>Injector</tt>:</p><div class="source"><pre class="prettyprint">import static com.google.inject.Guice.createInjector;
+
+import org.nnsoft.guice.lifegycle.DisposeModule;
+
+...
+
+Injector injector = createInjector( new DisposeModule(), ... );</pre></div><p>Then, require the <tt>org.nnsoft.guice.lifegycle.Disposer</tt> injection to shutdown the application:</p><div class="source"><pre class="prettyprint">import org.nnsoft.guice.lifegycle.Disposer;
+
+...
+
+Runtime.getRuntime().addShutdownHook( new Thread()
+{
+
+    public void run()
+    {
+        injector.getInstance( Disposer.class ).dispose();
+    }
+
+} );</pre></div><p>Of course, same concept can be applied to any listener <tt>javax.servlet.ServletContextListener</tt>:</p><div class="source"><pre class="prettyprint">import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+
+public final class ContextListener
+   implements ServletContextListener
+{
+
+    private Injector injector;
+
+    public void contextDestroyed( ServletContextEvent event )
+    {
+        injector.getInstance( Disposer.class ).dispose();
+    }
+
+    public void contextInitialized( ServletContextEvent event )
+    {
+        ...
+    }
+
+}</pre></div></div><div class="section"><h2>Dispose Handling<a name="Dispose_Handling"></a></h2><p>Users interested on tracking/logging/... objects dispose progresses, can register a <tt>org.nnsoft.guice.lifegycle.DisposeHandler</tt>, which has the following methods signatures:</p><div class="source"><pre class="prettyprint">public interface DisposeHandler
+{
+
+    &lt;I&gt; void onSuccess( I injectee );
+
+    &lt;I, E extends Throwable&gt; void onError( I injectee, E error );
+
+}</pre></div><p>A <tt>DisposeHandler</tt> instance can be passed to <tt>Disposer#dispose()</tt> method:</p><div class="source"><pre class="prettyprint">injector.getInstance( Disposer.class ).dispose( new DisposeHandler
+{
+
+    public &lt;I&gt; void onSuccess( I injectee )
+    {
+        logger.info( &quot;Object {} successfully released resources&quot;, injectee );
+    }
+
+    public &lt;I, E extends Throwable&gt; void onError( I injectee, E error )
+    {
+        logger.error( &quot;Impossible to released resources of &quot; + injectee, error );
+    }
+
+} );</pre></div></div><div class="section"><h2>Customization<a name="Customization"></a></h2><p>The <tt>DisposeModule</tt> module supports dynamic definition of the annotation has to be handled; let's replace the <tt>org.nnsoft.guice.lifegycle.Dispose</tt> with the <tt>javax.annotation.PreDestroy</tt>:</p><div class="source"><pre class="prettyprint">import javax.annotation.PreDestroy;
+
+@Singleton // not necessary, but let's add some spice
+public class MyServiceImpl
+{
+
+    @Inject
+    private Dependency dependency;
+
+    // setter omitted for simplicity
+
+    @PreDestroy
+    public void tearDown()
+    {
+        ...
+    }
+
+}</pre></div><p>then, create the <tt>Injector</tt>:</p><div class="source"><pre class="prettyprint">import static com.google.inject.Guice.createInjector;
+
+import javax.annotation.PreDestroy;
+import org.nnsoft.guice.lifegycle.AfterInjectionModule;
+
+...
+
+Injector injector = createInjector( new DisposeModule( PreDestroy.class, Matchers.any() ), ... );</pre></div></div>
                   </div>
       </div>
     </div>
