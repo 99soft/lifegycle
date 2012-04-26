@@ -21,6 +21,8 @@ import static junit.framework.Assert.assertTrue;
 
 import org.junit.Test;
 
+import com.google.inject.ConfigurationException;
+
 public final class AfterInjectionTestCase
 {
 
@@ -41,7 +43,7 @@ public final class AfterInjectionTestCase
         assertTrue( afterInjectionInvoked );
     }
 
-    @Test//( expected = ConfigurationException.class )
+    @Test( expected = ConfigurationException.class )
     public void afterInjectionAnnotatedMehthodRequiresNoArgs()
     {
         createInjector( new AfterInjectionModule() ).getInstance( WrongAfterInjectionMethod.class );

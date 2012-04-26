@@ -5,10 +5,8 @@ import static junit.framework.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.nnsoft.guice.lifegycle.Dispose;
-import org.nnsoft.guice.lifegycle.DisposeModule;
-import org.nnsoft.guice.lifegycle.Disposer;
 
+import com.google.inject.ConfigurationException;
 import com.google.inject.Inject;
 
 public final class DisposeTestCase
@@ -43,6 +41,12 @@ public final class DisposeTestCase
     {
         disposer.dispose();
         assertTrue( disposeInvoked );
+    }
+
+    @Test( expected = ConfigurationException.class )
+    public void afterInjectionAnnotatedMehthodRequiresNoArgs()
+    {
+        createInjector( new DisposeModule() ).getInstance( WrongDisposeMethod.class );
     }
 
 }
