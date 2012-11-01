@@ -121,8 +121,12 @@ public final class Disposer
          */
         public Disposable( Method disposeMethod, Object injectee )
         {
+        	if (!disposeMethod.isAccessible()) {
+        		disposeMethod.setAccessible(true);
+        	}
+        	
             this.disposeMethod = disposeMethod;
-            this.injectee = injectee;
+            this.injectee = injectee;                       
         }
 
         /**
