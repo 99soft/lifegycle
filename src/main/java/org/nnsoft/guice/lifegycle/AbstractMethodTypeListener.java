@@ -16,12 +16,12 @@ package org.nnsoft.guice.lifegycle;
  *  limitations under the License.
  */
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Method;
-
 import com.google.inject.TypeLiteral;
 import com.google.inject.spi.TypeEncounter;
 import com.google.inject.spi.TypeListener;
+
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
 
 /**
  * A Guice {@code TypeListener} to hear annotated methods with lifecycle annotations.
@@ -66,7 +66,13 @@ abstract class AbstractMethodTypeListener
      */
     private <I> void hear( Class<? super I> type, TypeEncounter<I> encounter )
     {
-        if ( type == null || type.getPackage().getName().startsWith( JAVA_PACKAGE ) )
+        if ( type == null )
+        {
+            return;
+        }
+        // JDK proxies of public interfaces have no package
+        Package packaj = type.getPackage();
+        if ( packaj == null || packaj.getName().startsWith( JAVA_PACKAGE ) )
         {
             return;
         }
